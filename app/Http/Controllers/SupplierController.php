@@ -42,8 +42,9 @@ class SupplierController extends Controller
             'nama.required' => 'Nama harus diisi',
             'nama.min' => 'Minimal 3 karakter'
         ]);
-
+        $data['phone'] = $request->phone;
         $data['alamat'] = $request->alamat;
+        $data['deskripsi'] = $request->deskripsi;
 
         Supplier::create($data);
         return redirect('supplier')->with('success', 'Supplier berhasil ditambahkan');
@@ -89,7 +90,9 @@ class SupplierController extends Controller
             'nama.min' => 'Minimal 3 karakter'
         ]);
 
+        $data['phone'] = $request->phone;
         $data['alamat'] = $request->alamat;
+        $data['deskripsi'] = $request->deskripsi;
 
         $supplier = Supplier::find($id);
         $supplier->update($data);

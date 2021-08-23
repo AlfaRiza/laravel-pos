@@ -14,7 +14,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customer = Customer::latest()->get();
+        return view('customer.index', ['customer' => $customer]);
     }
 
     /**
@@ -24,7 +25,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customer.create');
     }
 
     /**
@@ -35,7 +36,18 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'nama' => 'required',
+            // 'phone' => 'numeric',
+        ], [
+            'nama.required' => 'Nama harus diisi'
+        ]);
+        $data['phone'] = $request->phone;
+        $data['alamat'] = $request->alamat;
+
+        Customer::create($data);
+
+        return redirect('/customer')->with('success', 'Customer berhasil ditambahkan');
     }
 
     /**
@@ -55,9 +67,10 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit($id)
     {
-        //
+        $data = Customer::find($id);
+        return view('customer.edit', ['data' => $data]);
     }
 
     /**
@@ -67,9 +80,19 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'nama' => 'required',
+        ], [
+            'nama.required' => 'Nama harus diisi'
+        ]);
+        $data['phone'] = $request->phone;
+        $data['alamat'] = $request->alamat;
+
+        $customer = Customer::find($id);
+        $customer->update($data);
+        return redirect('customer')->with('success', 'Customer berhasil diupdate');
     }
 
     /**
@@ -78,8 +101,9 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy($id)
     {
-        //
+        Customer::destroy($id);
+        return redirect('customer')->with('success', 'Customer berhasil dihapus');
     }
 }

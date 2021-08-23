@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1>Supplier</h1>
+            <h1>Customer</h1>
         </div>
     </div>
     @if(session('success'))
@@ -17,7 +17,7 @@
     @endif
     <div class="row my-3">
         <div class="col">
-            <a href="/createSupplier" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Supplier</a>
+            <a href="/createCustomer" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Customer</a>
         </div>
     </div>
     <div class="row">
@@ -29,40 +29,40 @@
             <th scope="col">Nama</th>
             <th scope="col">No Hp</th>
             <th scope="col">Alamat</th>
-            <th scope="col">Deskripsi</th>
             <th scope="col">Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @forelse($supplier as $s)
+            @forelse($customer as $c)
             <tr>
             <th scope="row">{{ $loop->iteration }}</th>
-            <td>{{ $s->nama }}</td>
-            <td>{{ $s->phone }}</td>
-            <td>{{ $s->alamat }}</td>
-            <td>{{ $s->deskripsi }}</td>
+            <td>{{ $c->nama }}</td>
+            <td>{{ $c->phone }}</td>
+            <td>{{ $c->alamat }}</td>
             <td>
-                <!-- <a href="/detailSupplier/{{ $s->id }}" class="text-primary"><i class="fas fa-info"></i></a> |  -->
-                <a href="/editSupplier/{{ $s->id }}" class="text-success"><i class="fas fa-edit"></i></a> | 
-                <a href="#" class="text-danger ml-2" data-toggle="modal" data-target="#delete{{ $s->id }}"><i class="fas fa-trash"></i></a>
+                <!-- <a href="/detailSupplier/{{ $c->id }}" class="text-primary"><i class="fas fa-info"></i></a> |  -->
+                <a href="/editCustomer/{{ $c->id }}" class="text-success"><i class="fas fa-edit"></i></a> |
+                @if($c->id != 1) 
+                <a href="#" class="text-danger ml-2" data-toggle="modal" data-target="#delete{{ $c->id }}"><i class="fas fa-trash"></i></a>
+                @endif
             </td>
             </tr>
             <!-- Modal -->
-            <div class="modal fade" id="delete{{ $s->id }}" tabindex="-1" aria-labelledby="delete{{ $s->id }}Label" aria-hidden="true">
+            <div class="modal fade" id="delete{{ $c->id }}" tabindex="-1" aria-labelledby="delete{{ $c->id }}Label" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="delete{{ $s->id }}Label">Modal title</h5>
+                    <h5 class="modal-title" id="delete{{ $c->id }}Label">Modal title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Hapus Data supplier {{ $s->nama }}
+                    Hapus Data customer {{ $c->nama }}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form action="/supplier/{{ $s->id }}" method="POST">
+                    <form action="/customer/{{ $c->id }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="text-white btn btn-danger">Yakin</button>
@@ -73,7 +73,7 @@
             </div>
             @empty
             <tr>
-            <td colspan="6" class="text-center">Data kosong</td>
+            <td colspan="5" class="text-center">Data kosong</td>
             </tr>
             @endforelse
             

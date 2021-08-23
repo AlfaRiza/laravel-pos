@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Customer;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 class DatabaseSeeder extends Seeder
@@ -25,6 +26,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'alam@gmail.com',
             'password' => bcrypt('12345678'),
             'is_admin' => 1
+        ]);
+
+        Customer::create([
+            'nama' => 'Umum',
+            'alamat' => 'Jalan in dulu aja',
         ]);
     }
 }

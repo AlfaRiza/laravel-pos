@@ -4,11 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
-        <form action="/supplier" method="post">
+        <form action="/customer" method="post">
         @csrf
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>
-                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" id="nama" value="{{ old('nama') }}">
+                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}" id="nama">
                 @error('nama')
                 <div  class="invalid-feedback">
                     {{ $message }}
@@ -16,7 +16,7 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="phone" class="form-label">No Hp</label>
+                <label for="phone" class="form-label">No Hp <small>(optional)</small></label>
                 <input type="number" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}" id="phone">
                 @error('phone')
                 <div  class="invalid-feedback">
@@ -28,15 +28,6 @@
                 <label for="alamat">Alamat <small>(optional)</small></label>
                 <textarea name="alamat" class="form-control @error('alamat') is-invalid @enderror" id="alamat" rows="3">{{ old('alamat') }}</textarea>
                 @error('alamat')
-                <div  class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
-            </div>
-            <div class="form-group mb-3">
-                <label for="deskripsi">Deskripsi <small>(optional)</small></label>
-                <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" rows="3">{{ old('deskripsi') }}</textarea>
-                @error('deskripsi')
                 <div  class="invalid-feedback">
                     {{ $message }}
                 </div>

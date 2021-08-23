@@ -16,10 +16,28 @@
                 </div>
                 @enderror
             </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">No Hp</label>
+                <input type="number" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" value="{{ $data->phone }}">
+                @error('phone')
+                <div  class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
             <div class="form-group mb-3">
                 <label for="alamat">Alamat <small>(optional)</small></label>
                 <textarea name="alamat" class="form-control @error('alamat') is-invalid @enderror" id="alamat" rows="3">{{ $data->alamat }}</textarea>
                 @error('alamat')
+                <div  class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+            <div class="form-group mb-3">
+                <label for="deskripsi">Deskripsi <small>(optional)</small></label>
+                <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" rows="3">{{ $data->deskripsi }}</textarea>
+                @error('deskripsi')
                 <div  class="invalid-feedback">
                     {{ $message }}
                 </div>
