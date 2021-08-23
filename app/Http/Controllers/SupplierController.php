@@ -67,9 +67,10 @@ class SupplierController extends Controller
      * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function edit(Supplier $supplier)
+    public function edit($id)
     {
-        //
+        $data = Supplier::find($id);
+        return view('supplier.edit', ['data' => $data]);
     }
 
     /**
@@ -79,9 +80,20 @@ class SupplierController extends Controller
      * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Supplier $supplier)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'nama' => 'required|min:3',
+        ], [
+            'nama.required' => 'Nama harus diisi',
+            'nama.min' => 'Minimal 3 karakter'
+        ]);
+
+        $data['alamat'] = $request->alamat;
+
+        $supplier = Supplier::find($id);
+        $supplier->update($data);
+        return redirect('supplier')->with('success', 'Supplier berhasil diupdate');
     }
 
     /**
@@ -90,8 +102,10 @@ class SupplierController extends Controller
      * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Supplier $supplier)
+    public function destroy($id)
     {
-        //
+        // dd($supplier);
+        Supplier::destroy($id);
+        return redirect('supplier')->with('success', 'Data berhasil dihapus');
     }
 }

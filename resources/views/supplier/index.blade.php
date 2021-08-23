@@ -38,14 +38,35 @@
             <td>{{ $s->nama }}</td>
             <td>{{ $s->alamat }}</td>
             <td>
-                <a href="/detailSupplier" class="text-primary"><i class="fas fa-info"></i></a>
-                <a href="/editSupplier" class="text-success"><i class="fas fa-edit"></i></a>
-                <form action="/supplier" method="POST">
-                @csrf
-                {{ method('DELETE') }}
-                </form>
+                <!-- <a href="/detailSupplier/{{ $s->id }}" class="text-primary"><i class="fas fa-info"></i></a> |  -->
+                <a href="/editSupplier/{{ $s->id }}" class="text-success"><i class="fas fa-edit"></i></a> | 
+                <a href="/editSupplier/{{ $s->id }}" class="text-danger ml-2" data-toggle="modal" data-target="#delete{{ $s->id }}"><i class="fas fa-trash"></i></a>
             </td>
             </tr>
+            <!-- Modal -->
+            <div class="modal fade" id="delete{{ $s->id }}" tabindex="-1" aria-labelledby="delete{{ $s->id }}Label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="delete{{ $s->id }}Label">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Hapus Data supplier {{ $s->nama }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form action="/supplier/{{ $s->id }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-white btn btn-danger">Yakin</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
             @empty
             <tr>
             <td colspan="4" class="text-center">Data kosong</td>
