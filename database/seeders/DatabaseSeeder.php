@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
         Customer::create([
             'nama' => 'Umum',
-            'alamat' => 'Jalan in dulu aja',
+            'alamat' => '',
         ]);
     }
 }

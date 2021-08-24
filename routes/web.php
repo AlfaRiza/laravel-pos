@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KategoriBarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/editCustomer/{id}', [CustomerController::class, 'edit']);
     Route::put('/customer/{id}', [CustomerController::class, 'update']);
     Route::delete('customer/{id}', [CustomerController::class, 'destroy']);
+});
+
+// Kategori Barang
+Route::middleware(['auth'])->group(function () {
+    Route::get('/kategoriBarang', [KategoriBarangController::class, 'index']);
+    Route::post('/kategoriBarang', [KategoriBarangController::class, 'store']);
+    Route::get('/createKategoriBarang', [KategoriBarangController::class, 'create']);
+    Route::get('/kategoriBarang/{id}', [KategoriBarangController::class, 'show']);
+    Route::get('/editKategoriBarang/{id}', [KategoriBarangController::class, 'edit']);
+    Route::put('/kategoriBarang/{id}', [KategoriBarangController::class, 'update']);
+    Route::delete('kategoriBarang/{id}', [KategoriBarangController::class, 'destroy']);
 });
 
 
