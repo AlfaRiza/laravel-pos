@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSatuanBarangsTable extends Migration
+class CreateLevelHargasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSatuanBarangsTable extends Migration
      */
     public function up()
     {
-        Schema::create('satuan_barangs', function (Blueprint $table) {
+        Schema::create('level_hargas', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_satuan');
-            $table->text('deskripsi')->nullable();
+            $table->string('nama_level');
+            $table->text('deskripsi');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class CreateSatuanBarangsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('satuan_barangs');
+        Schema::dropIfExists('level_hargas');
     }
 }

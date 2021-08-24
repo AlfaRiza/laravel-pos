@@ -6,6 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LevelHargaController;
+use App\Http\Controllers\SatuanBarangController;
 use App\Http\Controllers\KategoriBarangController;
 
 /*
@@ -60,4 +62,24 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('kategoriBarang/{id}', [KategoriBarangController::class, 'destroy']);
 });
 
+// Kategori Barang
+Route::middleware(['auth'])->group(function () {
+    Route::get('/satuanBarang', [SatuanBarangController::class, 'index']);
+    Route::post('/satuanBarang', [SatuanBarangController::class, 'store']);
+    Route::get('/createSatuanBarang', [SatuanBarangController::class, 'create']);
+    Route::get('/satuanBarang/{id}', [SatuanBarangController::class, 'show']);
+    Route::get('/editSatuanBarang/{id}', [SatuanBarangController::class, 'edit']);
+    Route::put('/satuanBarang/{id}', [SatuanBarangController::class, 'update']);
+    Route::delete('satuanBarang/{id}', [SatuanBarangController::class, 'destroy']);
+});
 
+// Level Harga
+Route::middleware(['auth'])->group(function () {
+    Route::get('/levelHarga', [LevelHargaController::class, 'index']);
+    Route::post('/levelHarga', [LevelHargaController::class, 'store']);
+    Route::get('/createLevelHarga', [LevelHargaController::class, 'create']);
+    Route::get('/levelHarga/{id}', [LevelHargaController::class, 'show']);
+    Route::get('/editLevelHarga/{id}', [LevelHargaController::class, 'edit']);
+    Route::put('/levelHarga/{id}', [LevelHargaController::class, 'update']);
+    Route::delete('levelHarga/{id}', [LevelHargaController::class, 'destroy']);
+});
